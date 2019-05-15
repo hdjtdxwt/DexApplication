@@ -51,7 +51,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
     public void jumpActivity(){
         Intent intent = new Intent(this, ProxyActivity.class);
-        intent.putExtra("className","com.epsit.pluginapk.MainActivity");
+        intent.putExtra("className",PluginManager.getInstance().getEntryActivityName());
         startActivity(intent);
     }
 }

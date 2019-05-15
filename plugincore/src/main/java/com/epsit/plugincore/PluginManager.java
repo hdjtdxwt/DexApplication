@@ -5,6 +5,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
+import android.util.Log;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
@@ -29,7 +30,7 @@ public class PluginManager {
     private DexClassLoader dexClassLoader;//ClassLoader的子类
     //上下文
     private Context context;
-
+    private String entryActivityName;
     private PluginManager(){
 
     }
@@ -62,7 +63,11 @@ public class PluginManager {
 
         //通过包管理器获取插件dex中的包信息
         packageInfo = packageManager.getPackageArchiveInfo(path, PackageManager.GET_ACTIVITIES);
-
+        //activity集合跟App-B的Manifest中注册的activity有关 顺序也有关
+        entryActivityName = packageInfo.activities[1].name;
+        for (int i=0;i<packageInfo.activities.length;i++){
+            Log.e("PluginManager", packageInfo.activities[i].name);
+        }
         //AssetManager, DisplayMinifiest,
        // resources = new Resources()
         try {
@@ -80,7 +85,12 @@ public class PluginManager {
         } catch (InvocationTargetException e) {
             e.printStackTrace();
         }
+    }
+    public Resources getPluginResources() {
+        return resources;
+    }
 
-
+    public String getEntryActivityName() {
+        return entryActivityName;
     }
 }

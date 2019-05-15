@@ -18,7 +18,7 @@ public interface PluginInterface {
     void onResume();
     void onPause();
     void onStop();
-    void onDestory();
+    void onDestroy();
     void onSaveInstanceState(Bundle outState);
     boolean onTouchEvent(MotionEvent event);
     void onBackPressed();
