@@ -27,9 +27,9 @@ public class ProxyActivity extends Activity {
                 PluginInterface pluginInterface = (PluginInterface) newInstance;
                 //将替身activity的实例或上下文传给第三方的activity
                 pluginInterface.attach(this);
-                //Bundle bundle = new Bundle();//报错了所以注释了而换成了下面的这个
+                Bundle bundle = new Bundle();//报错了所以注释了而换成了下面的这个
                 //调用插件apk中的activity的onCreate方法
-                pluginInterface.onCreate(savedInstanceState);
+                pluginInterface.onCreate(bundle);
             }
         }catch (Exception e){
             e.printStackTrace();
