@@ -12,31 +12,20 @@ import com.epsit.plugincore.BaseActivity;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener{
     String TAG ="pluginapk-MainActivity";
-    Button button;
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        if(that==null){
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_main);
-            Log.e(TAG, "that == null  findViewById(R.id.third_btn)");
-            button = findViewById(R.id.third_btn);
-            button.setOnClickListener(this);
-        }else{
-            Log.e(TAG, "that != null  findViewById(R.id.third_btn)");
-            button = findViewById(R.id.third_btn);
-            button.setOnClickListener(this);
-        }
-
-
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        Log.e(TAG, "that == null  findViewById(R.id.third_btn)");
     }
     @Override
     public void onClick(View v) {
-        if(that==null){
+        if(thatActivity==null){
             Log.e(TAG, "that == null  Toast.makeText");
             Toast.makeText(getApplicationContext(), "我被点击了", Toast.LENGTH_SHORT).show();
         }else{
             Log.e(TAG, "that != null  Toast.makeText");
-            Toast.makeText(that, "我被点击了", Toast.LENGTH_SHORT).show();
+            Toast.makeText(thatActivity, "我被点击了", Toast.LENGTH_SHORT).show();
         }
         Intent intent = new Intent(getApplicationContext(), TwoActivity.class);
         startActivity(intent);

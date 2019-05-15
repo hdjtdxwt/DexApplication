@@ -2,6 +2,7 @@ package com.epsit.dexapplication;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -14,6 +15,7 @@ import com.epsit.plugincore.PluginManager;
  */
 public class ProxyActivity extends Activity {
     String TAG = "ProxyActivity";
+    PluginInterface pluginInterface;
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         //拿到要启动的第三方插件的Activity的名字
@@ -24,7 +26,7 @@ public class ProxyActivity extends Activity {
 
             //需要符合我们的标准才行
             if(newInstance instanceof PluginInterface){
-                PluginInterface pluginInterface = (PluginInterface) newInstance;
+                pluginInterface = (PluginInterface) newInstance;
                 //将替身activity的实例或上下文传给第三方的activity
                 pluginInterface.attach(this);
                 Bundle bundle = new Bundle();//报错了所以注释了而换成了下面的这个
@@ -42,4 +44,66 @@ public class ProxyActivity extends Activity {
         Log.e(TAG, "ProxyActivity =>startActivity(Intent intent) --马上要启动下自己了->className = "+className);
         super.startActivity(newIntent);
     }
+
+    /**
+     * 重新，通过className拿到类名
+     *
+     * @return
+     */
+    @Override
+    public ClassLoader getClassLoader() {
+        return PluginManager.getInstance().getDexClassLoader();
+    }
+
+
+    /**
+     * 注意：三方调用拿到对应加载的三方Resources
+     *
+     * @return
+     */
+    @Override
+    public Resources getResources() {
+        return PluginManager.getInstance().getPluginResources();
+    }
+
+
+    @Override
+    public void onStart() {
+        if (pluginInterface != null) {
+            pluginInterface.onStart();
+        }
+        super.onStart();
+    }
+
+    @Override
+    public void onResume() {
+        if (pluginInterface != null) {
+            pluginInterface.onResume();
+        }
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        if (pluginInterface != null) {
+            pluginInterface.onPause();
+        }
+        super.onPause();
+    }
+
+
+    @Override
+    public void onStop() {
+        if (pluginInterface != null)
+            pluginInterface.onStop();
+        super.onStop();
+    }
+
+    @Override
+    public void onDestroy() {
+        if (pluginInterface != null)
+            pluginInterface.onDestroy();
+        super.onDestroy();
+    }
+
 }

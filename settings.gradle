@@ -1,1 +1,1 @@
-include ':app', ':plugincore', ':pluginapk'
+include ':app', ':plugincore', ':pluginapk', ':teststart'
