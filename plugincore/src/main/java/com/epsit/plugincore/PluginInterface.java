@@ -13,6 +13,7 @@ public interface PluginInterface {
      * @param pligunActivity
      */
     void attach(Activity pligunActivity);
+    void printAttachActivityInfo();
     void onCreate(Bundle savedInstanceState);
     void onStart();
     void onResume();

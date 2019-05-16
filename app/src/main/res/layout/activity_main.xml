@@ -9,7 +9,8 @@
     <TextView
         android:id="@+id/loadApk"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="24dp"
+        android:background="@color/colorAccent"
         android:text="加载第三方apk"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.546"
@@ -21,7 +22,8 @@
     <TextView
         android:id="@+id/jumpActivity"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="24dp"
+        android:background="@color/colorAccent"
         android:text="点击跳转到第三方apk的第一个就界面"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.596"

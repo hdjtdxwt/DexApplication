@@ -5,6 +5,8 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.util.Log;
 
 import java.io.File;
@@ -51,6 +53,7 @@ public class PluginManager {
      * 加载第三方的插件apk
      * @param path 第三方插件的路径
      */
+    @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
     public void loadPath(String path)  {
         //获取当前应用的内部的私有存储路径(第一个参数是固定的)
         File dexOutFile = context.getDir("dex",Context.MODE_PRIVATE);
@@ -64,7 +67,8 @@ public class PluginManager {
         //通过包管理器获取插件dex中的包信息
         packageInfo = packageManager.getPackageArchiveInfo(path, PackageManager.GET_ACTIVITIES);
         //activity集合跟App-B的Manifest中注册的activity有关 顺序也有关
-        entryActivityName = packageInfo.activities[1].name;
+        entryActivityName = packageInfo.activities[0].name;
+        Log.e("PluginManager","要启动的第三方的控件："+entryActivityName);
         for (int i=0;i<packageInfo.activities.length;i++){
             Log.e("PluginManager", packageInfo.activities[i].name);
         }

@@ -16,18 +16,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        findViewById(R.id.third_btn).setOnClickListener(this);
         Log.e(TAG, "that == null  findViewById(R.id.third_btn)");
     }
     @Override
     public void onClick(View v) {
-        if(thatActivity==null){
-            Log.e(TAG, "that == null  Toast.makeText");
-            Toast.makeText(getApplicationContext(), "我被点击了", Toast.LENGTH_SHORT).show();
-        }else{
-            Log.e(TAG, "that != null  Toast.makeText");
-            Toast.makeText(thatActivity, "我被点击了", Toast.LENGTH_SHORT).show();
-        }
-        Intent intent = new Intent(getApplicationContext(), TwoActivity.class);
+        Log.e(TAG, "that != null  Toast.makeText");
+        Toast.makeText(that, "我被点击了", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(that, TwoActivity.class);
+        intent.putExtra("className", "com.epsit.pluginapk.TwoActivity");
         startActivity(intent);
     }
 }

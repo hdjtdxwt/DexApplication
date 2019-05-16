@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.epsit.plugincore.BaseActivity;
@@ -23,12 +24,14 @@ public class ProxyActivity extends Activity {
         try{
             Class<?> aClass = PluginManager.getInstance().getDexClassLoader().loadClass(className);
             Object newInstance = aClass.newInstance();
-
+            Log.e(TAG,"onCreate");
             //需要符合我们的标准才行
             if(newInstance instanceof PluginInterface){
                 pluginInterface = (PluginInterface) newInstance;
+                Log.e("ProxyActivity","pluginInterface="+pluginInterface.getClass().getName());
                 //将替身activity的实例或上下文传给第三方的activity
                 pluginInterface.attach(this);
+                pluginInterface.printAttachActivityInfo();
                 Bundle bundle = new Bundle();//报错了所以注释了而换成了下面的这个
                 //调用插件apk中的activity的onCreate方法
                 pluginInterface.onCreate(bundle);
@@ -69,41 +72,41 @@ public class ProxyActivity extends Activity {
 
     @Override
     public void onStart() {
+        super.onStart();
         if (pluginInterface != null) {
             pluginInterface.onStart();
         }
-        super.onStart();
     }
 
     @Override
     public void onResume() {
+        super.onResume();
         if (pluginInterface != null) {
             pluginInterface.onResume();
         }
-        super.onResume();
     }
 
     @Override
     public void onPause() {
+        super.onPause();
         if (pluginInterface != null) {
             pluginInterface.onPause();
         }
-        super.onPause();
     }
 
 
     @Override
     public void onStop() {
+        super.onStop();
         if (pluginInterface != null)
             pluginInterface.onStop();
-        super.onStop();
     }
 
     @Override
     public void onDestroy() {
+        super.onDestroy();
         if (pluginInterface != null)
             pluginInterface.onDestroy();
-        super.onDestroy();
     }
 
 }

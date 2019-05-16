@@ -14,13 +14,12 @@ import android.widget.BaseAdapter;
 import com.epsit.plugincore.BaseActivity;
 import com.epsit.plugincore.PluginManager;
 
-public class MainActivity extends BaseActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     String TAG = "app->MainActivity";
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         findViewById(R.id.loadApk).setOnClickListener(this);
         findViewById(R.id.jumpActivity).setOnClickListener(this);
     }
