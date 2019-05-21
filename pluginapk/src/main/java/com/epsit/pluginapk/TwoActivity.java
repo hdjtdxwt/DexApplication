@@ -19,7 +19,12 @@ public class TwoActivity extends BaseActivity implements View.OnClickListener {
     }
     public void onClick(View view){
         Log.e(TAG, "that != null  TwoActivity Toast.makeText");
-        Toast.makeText(that, "我被点击了", Toast.LENGTH_SHORT).show();
+        if(that==null){
+            Toast.makeText(getApplicationContext(), "我被点击了", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(that, "我被点击了", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
 }
