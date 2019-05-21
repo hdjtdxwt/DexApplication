@@ -41,11 +41,19 @@ public class ProxyActivity extends Activity {
         }
     }
     public void startActivity(Intent intent){
-        String className = intent.getStringExtra("className");
-        Intent newIntent = new Intent(this, ProxyActivity.class);
-        newIntent.putExtra("className", className);
-        Log.e(TAG, "ProxyActivity =>startActivity(Intent intent) --马上要启动下自己了->className = "+className);
-        super.startActivity(newIntent);
+        if(intent!=null){
+            String className = intent.getStringExtra("className");
+            Intent newIntent = new Intent(this, ProxyActivity.class);
+            Bundle bundle = intent.getExtras();
+            if(bundle!=null){
+                newIntent.putExtras(bundle);
+            }
+            newIntent.putExtra("className", className);
+            Log.e(TAG, "ProxyActivity =>startActivity(Intent intent) --马上要启动下自己了->className = "+className);
+            super.startActivity(newIntent);
+        }
+
+
     }
 
     /**
